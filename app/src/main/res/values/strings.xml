@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">catedra-moviles-DSM104-G01T</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="calendar">Calendario</string>
+    <string name="log">Historial</string>
+    <string name="lorem_ipsum">lorem ipsum</string>
+    <string name="add_medicine">Agregar medicina</string>
+    <string name="no_medicines_to_show">No hay ningun medicamento que mostrar</string>
+</resources>

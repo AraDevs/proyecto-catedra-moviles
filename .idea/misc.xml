@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/empty_medicines.xml" value="0.25" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/fragment_calendar.xml" value="0.4074074074074074" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/layout/medicine_item.xml" value="0.27906976744186046" />
+        <entry key="..\:/Files/AndroidUDBApps/catedramovilesDSM104G01T/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22448979591836735" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.15" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
