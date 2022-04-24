@@ -31,8 +31,6 @@ l
 <domain/src/main/java/com/aradevs/domain/coroutines/Status.kt,a\0\a0269fb895aab42bdcbb41b9676d57c9892fdd7f
 Š
 Zstoragemanager/src/main/java/com/aradevs/storagemanager/repositories/DatabaseRepository.kt,b\a\bac68e6c27a937bfd89c8015aeb6968663c412d8
-„
-Tapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/history/HistoryFragment.kt,f\c\fc1fceb1231399de83ead865a7ba3ae0eaeaff9c
 ~
 Napp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/MainActivity.kt,e\4\e4c38b6c6fb8fbdc3221d340abb4d312c4ca7778
 “

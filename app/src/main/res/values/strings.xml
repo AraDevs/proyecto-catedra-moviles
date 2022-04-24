@@ -15,4 +15,5 @@
     <string name="current_medicine_header_description">...o si lo prefieres, verifica abajo tus siguientes medicamentos</string>
     <string name="current_medicine_empty_header_description">No tienes ningun medicamento en la proxima hora, verifica abajo el resto de tus medicamentos</string>
     <string name="log_description">Medicamentos que consumes o has consumido previamente</string>
+    <string name="all_good">Todo bien</string>
 </resources>
