@@ -6,4 +6,13 @@
     <string name="lorem_ipsum">lorem ipsum</string>
     <string name="add_medicine">Agregar medicina</string>
     <string name="no_medicines_to_show">No hay ningun medicamento que mostrar</string>
+    <string name="empty_string">- - -</string>
+    <string-array name="range_picker_items">
+        <item>Hoy</item>
+        <item>7 dias</item>
+    </string-array>
+    <string name="error_obtaining_info">Error al obtener la informacion</string>
+    <string name="current_medicine_header_description">...o si lo prefieres, verifica abajo tus siguientes medicamentos</string>
+    <string name="current_medicine_empty_header_description">No tienes ningun medicamento en la proxima hora, verifica abajo el resto de tus medicamentos</string>
+    <string name="log_description">Medicamentos que consumes o has consumido previamente</string>
 </resources>
