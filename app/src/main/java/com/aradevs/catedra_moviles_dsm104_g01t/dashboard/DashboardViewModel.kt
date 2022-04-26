@@ -7,13 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.aradevs.domain.Medicine
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.storagemanager.use_cases.GetMedicinesUseCase
+import com.aradevs.storagemanager.use_cases.SaveMedicineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(private val getMedicinesUseCase: GetMedicinesUseCase) :
+class DashboardViewModel @Inject constructor(
+    private val getMedicinesUseCase: GetMedicinesUseCase,
+    private val saveMedicineUseCase: SaveMedicineUseCase,
+) :
     ViewModel() {
 
     private val _medicinesStatus: MutableLiveData<Status<List<Medicine>>> =
@@ -37,5 +41,15 @@ class DashboardViewModel @Inject constructor(private val getMedicinesUseCase: Ge
         }
     }
 
+    fun saveMedicine(medicine: Medicine) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (saveMedicineUseCase(medicine)) {
+                is Status.Success -> getMedicines()
+                else -> {
+                    //do nothing
+                }
+            }
+        }
+    }
 
 }

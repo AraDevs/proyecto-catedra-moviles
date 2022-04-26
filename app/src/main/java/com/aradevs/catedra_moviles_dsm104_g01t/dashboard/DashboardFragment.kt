@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.aradevs.catedra_moviles_dsm104_g01t.*
 import com.aradevs.catedra_moviles_dsm104_g01t.R
 import com.aradevs.catedra_moviles_dsm104_g01t.adapters.MedicineListAdapter
+import com.aradevs.catedra_moviles_dsm104_g01t.dashboard.dialogs.AddMedicineDialog
 import com.aradevs.catedra_moviles_dsm104_g01t.databinding.FragmentDashboardBinding
 import com.aradevs.domain.Medicine
 import com.aradevs.domain.SpanType
@@ -28,15 +29,31 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         super.onViewCreated(view, savedInstanceState)
         observeMedicineStatus()
         viewModel.getMedicines()
+
+        binding.addMedicine.setOnClickListener {
+            AddMedicineDialog.newInstance { onMedicineAdd(it) }
+                .show(childFragmentManager, "add_medicine")
+        }
+        binding.refresher.setOnRefreshListener {
+            viewModel.getMedicines()
+        }
+    }
+
+    private fun onMedicineAdd(medicine: Medicine) {
+        viewModel.saveMedicine(medicine)
     }
 
     private fun observeMedicineStatus() {
         viewModel.medicineStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
-                is Status.Error -> Snackbar.make(binding.root,
-                    getString(R.string.error_obtaining_info),
-                    LENGTH_SHORT).show()
+                is Status.Error -> {
+                    Snackbar.make(binding.root,
+                        getString(R.string.error_obtaining_info),
+                        LENGTH_SHORT).show()
+                    binding.refresher.isRefreshing = false
+                }
                 is Status.Success -> {
+                    binding.refresher.isRefreshing = false
                     setupUI()
                 }
                 else -> {

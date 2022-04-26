@@ -3,8 +3,6 @@
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 C
 domain/build.gradle,a\3\a3021bb5ba623a461b5fdb89ae51923a4945c354
 €
@@ -39,3 +37,15 @@ capp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/view_models/Main
 Vapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/calendar/CalendarFragment.kt,c\c\ccfbd8e7edc9b21309e668e8bcf3a4f6ac47d10d
 z
 Jstoragemanager/src/main/java/com/aradevs/storagemanager/dao/DatabaseDao.kt,0\7\07d952c27fa96040c92d7860fc8b043f4d9ee600
+|
+Lapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/BaseApplication.kt,9\e\9ef4d453899f1659bdfd55494e813a0effd65c0c
+s
+Cstoragemanager/src/main/java/com/aradevs/storagemanager/Entities.kt,c\0\c045f2b2202aad149de29496640355ad6235b518
+u
+Estoragemanager/src/main/java/com/aradevs/storagemanager/Converters.kt,f\0\f0c03883682b0fbc3236a291bd4cd49715cd1b31
+„
+Tapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/history/HistoryFragment.kt,f\c\fc1fceb1231399de83ead865a7ba3ae0eaeaff9c
+c
+3domain/src/main/java/com/aradevs/domain/SpanType.kt,9\a\9a42572db6ebba071d4633dea5980fdb800016e5
+r
+Bapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/Utils.kt,7\9\79d37a23c3419304e3fe6297705abacd0b8dcbfd

@@ -16,4 +16,18 @@
     <string name="current_medicine_empty_header_description">No tienes ningun medicamento en la proxima hora, verifica abajo el resto de tus medicamentos</string>
     <string name="log_description">Medicamentos que consumes o has consumido previamente</string>
     <string name="all_good">Todo bien</string>
+    <string name="medicine">Medicamento</string>
+    <string name="name">Nombre</string>
+    <string name="init_date">Fecha inicio</string>
+    <string name="doctor_name">Nombre de medico</string>
+    <string name="take_every">Tomar cada</string>
+    <string name="hours">horas</string>
+    <string name="one">1</string>
+    <string name="color_indicator">Indicador de color</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="select_a_color">Selecciona un color</string>
+    <string name="valid_hour_interval">Ingresa un numero de horas valido</string>
+    <string name="validation_error_add_medicine">Ingresa una fecha de inicio valida o un intervalo de horas entre 1 y 24</string>
+    <string name="check_error_add_medicine">Por favor ingresa todos los datos y escoge un color para tu medicamento</string>
 </resources>

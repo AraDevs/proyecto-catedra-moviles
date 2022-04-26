@@ -1,6 +1,7 @@
 package com.aradevs.catedra_moviles_dsm104_g01t.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -32,6 +33,7 @@ class MedicineListAdapter(private val needsFullInfo: Boolean) :
                 title.text = medicine.name
                 description.isVisible = needsFullInfo
                 dateTime.text = medicine.startDate.toDayMonthYearHour()
+                colorIndicator.setBackgroundColor(Color.parseColor(medicine.color))
             }
         }
     }

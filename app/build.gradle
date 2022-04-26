@@ -77,4 +77,8 @@ dependencies {
 
     //view binding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.6'
+
+    //color picker
+    implementation 'com.github.Dhaval2404:ColorPicker:2.3'
+
 }
