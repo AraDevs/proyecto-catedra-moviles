@@ -23,7 +23,7 @@ import java.util.*
 
 
 /**
- * [AddMedicineDialog] Dialog that should be displayed when [Log] data is requested
+ * [AddMedicineDialog] Dialog that should be displayed when [Medicine] data is requested
  */
 class AddMedicineDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
