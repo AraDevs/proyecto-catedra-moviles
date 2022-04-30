@@ -8,6 +8,7 @@ import com.aradevs.domain.Medicine
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.storagemanager.use_cases.GetMedicinesUseCase
 import com.aradevs.storagemanager.use_cases.SaveMedicineUseCase
+import com.aradevs.storagemanager.use_cases.UpdateMedicineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val getMedicinesUseCase: GetMedicinesUseCase,
     private val saveMedicineUseCase: SaveMedicineUseCase,
+    private val updateMedicineUseCase: UpdateMedicineUseCase,
 ) :
     ViewModel() {
 
@@ -37,6 +39,17 @@ class DashboardViewModel @Inject constructor(
                 }
                 is Status.Error -> _medicinesStatus.postValue(status)
                 else -> _medicinesStatus.postValue(Status.Loading())
+            }
+        }
+    }
+
+    fun setMedicineAsInactive(medicine: Medicine) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (updateMedicineUseCase(medicine.copy(status = false))) {
+                is Status.Success -> getMedicines()
+                else -> {
+                    //do nothing
+                }
             }
         }
     }

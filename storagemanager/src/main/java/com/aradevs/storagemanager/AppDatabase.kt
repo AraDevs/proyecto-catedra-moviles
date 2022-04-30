@@ -6,11 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.aradevs.storagemanager.dao.DatabaseDao
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 @Database(
-    entities = [MedicineEntity::class, NotificationEntity::class],
-    version = 1
+    entities = [MedicineEntity::class],
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {

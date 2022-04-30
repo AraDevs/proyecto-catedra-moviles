@@ -9,4 +9,6 @@ data class Medicine(
     val startDate: Date,
     val repeatInterval: String,
     val color: String,
+    val status: Boolean,
+    val requiresNotification: Boolean
 )

@@ -11,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aradevs.catedra_moviles_dsm104_g01t.databinding.MedicineItemBinding
 import com.aradevs.domain.Medicine
 import com.c3rberuss.androidutils.toDayMonthYearHour
+import timber.log.Timber
 
-class MedicineListAdapter(private val needsFullInfo: Boolean) :
+class MedicineListAdapter(
+    private val needsFullInfo: Boolean,
+    private val onDeleteTapped: (Medicine) -> Unit,
+) :
     ListAdapter<Medicine, MedicineListAdapter.ProductViewHolder>(diffUtils) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -34,6 +38,13 @@ class MedicineListAdapter(private val needsFullInfo: Boolean) :
                 description.isVisible = needsFullInfo
                 dateTime.text = medicine.startDate.toDayMonthYearHour()
                 colorIndicator.setBackgroundColor(Color.parseColor(medicine.color))
+                root.setOnClickListener {
+                    deleteMedicine.isVisible = !deleteMedicine.isVisible
+                }
+                deleteMedicine.setOnClickListener {
+                    Timber.d("TBD ${medicine.name}")
+                    onDeleteTapped(medicine)
+                }
             }
         }
     }

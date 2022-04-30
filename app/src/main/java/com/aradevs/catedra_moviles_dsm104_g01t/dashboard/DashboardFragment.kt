@@ -121,7 +121,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
         binding.medicineList.showThisAndHide(binding.emptyMedicines.root)
         recyclerViewLayoutSelector()
-        binding.medicineList.adapter = MedicineListAdapter(false).apply {
+        binding.medicineList.adapter = MedicineListAdapter(false) {
+            onMedicineDeleteTapped(it)
+        }.apply {
             submitList(listWithFilters)
         }
     }
@@ -165,5 +167,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             0 -> binding.medicineList.layoutManager = linearLayoutManager()
             else -> binding.medicineList.layoutManager = gridLayoutManager(R.integer.two_columns)
         }
+    }
+
+    private fun onMedicineDeleteTapped(medicine: Medicine) {
+        viewModel.setMedicineAsInactive(medicine)
     }
 }

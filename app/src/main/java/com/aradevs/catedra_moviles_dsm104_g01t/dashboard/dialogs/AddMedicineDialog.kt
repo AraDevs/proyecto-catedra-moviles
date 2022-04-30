@@ -70,7 +70,7 @@ class AddMedicineDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListen
                                 doctorName.text.toString(),
                                 initDate,
                                 numericInterval.toString(),
-                                colorHex ?: "#346DC3"))
+                                colorHex ?: "#346DC3", true, requiresNotification.isSelected))
                         }
                         dismiss()
                     } else {

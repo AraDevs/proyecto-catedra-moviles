@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -45,6 +46,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingHorizontal="10dp" />
+
                 <EditText
                     android:id="@+id/doctor_name"
                     android:layout_width="match_parent"
@@ -56,33 +58,38 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingHorizontal="10dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/take_every"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:text="@string/take_every" />
+
                     <EditText
                         android:id="@+id/repeat_interval"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
+                        android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/rounded_edit_text"
                         android:hint="@string/one"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:maxLines="1"
-                        android:layout_marginHorizontal="16dp"
                         android:paddingHorizontal="10dp" />
+
                     <TextView
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hours"/>
+                        android:layout_gravity="center"
+                        android:text="@string/hours" />
                 </LinearLayout>
+
                 <EditText
                     android:id="@+id/init_date"
                     android:layout_width="match_parent"
@@ -99,16 +106,27 @@
                     tools:ignore="KeyboardInaccessibleWidget,TextFields" />
 
                 <TextView
-                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/color_indicator"/>
+                    android:layout_marginTop="8dp"
+                    android:text="@string/color_indicator" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/color_picker"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    app:cornerRadius="14dp"/>
+                    app:cornerRadius="14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/set_notifications" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/requires_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

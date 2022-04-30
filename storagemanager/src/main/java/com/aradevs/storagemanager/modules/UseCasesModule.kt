@@ -19,26 +19,14 @@ class UseCasesModule {
         GetMedicinesUseCase(repository)
 
     @Provides
+    fun providesGetAllMedicineUseCase(repository: DatabaseRepository): GetAllMedicinesUseCase =
+        GetAllMedicinesUseCase(repository)
+
+    @Provides
     fun providesUpdateMedicineUseCase(repository: DatabaseRepository): UpdateMedicineUseCase =
         UpdateMedicineUseCase(repository)
 
     @Provides
     fun providesDeleteMedicineUseCase(repository: DatabaseRepository): DeleteMedicineUseCase =
         DeleteMedicineUseCase(repository)
-
-    @Provides
-    fun providesSaveNotificationUseCase(repository: DatabaseRepository): SaveNotificationUseCase =
-        SaveNotificationUseCase(repository)
-
-    @Provides
-    fun providesGetNotificationsUseCase(repository: DatabaseRepository): GetNotificationsUseCase =
-        GetNotificationsUseCase(repository)
-
-    @Provides
-    fun providesDeactivatePreviousNotifications(repository: DatabaseRepository): DeactivatePreviousNotificationsUseCase =
-        DeactivatePreviousNotificationsUseCase(repository)
-
-    @Provides
-    fun providesDeleteCurrentNotificationsUseCase(repository: DatabaseRepository): DeleteCurrentNotificationsUseCase =
-        DeleteCurrentNotificationsUseCase(repository)
 }
