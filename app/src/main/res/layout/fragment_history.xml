@@ -80,6 +80,7 @@
             android:id="@+id/medicine_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="5"
             tools:listitem="@layout/medicine_item" />
 

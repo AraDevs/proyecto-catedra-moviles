@@ -36,6 +36,7 @@ class MedicineListAdapter(
             with(binding) {
                 title.text = medicine.name
                 description.isVisible = needsFullInfo
+                description.text = medicine.doctorName
                 dateTime.text = medicine.startDate.toDayMonthYearHour()
                 colorIndicator.setBackgroundColor(Color.parseColor(medicine.color))
                 root.setOnClickListener {
