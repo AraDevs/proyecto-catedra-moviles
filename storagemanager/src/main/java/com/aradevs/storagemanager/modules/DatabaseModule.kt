@@ -7,6 +7,7 @@ import com.aradevs.storagemanager.datasources.implementations.DatabaseLocalDataS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 

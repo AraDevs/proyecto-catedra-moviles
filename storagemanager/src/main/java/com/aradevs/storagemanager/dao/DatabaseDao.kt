@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.aradevs.storagemanager.MedicineEntity
+import com.aradevs.storagemanager.NotificationEntity
 
 @Dao
 interface DatabaseDao {
@@ -21,5 +22,17 @@ interface DatabaseDao {
 
     @Query("delete from medicine_info where id = :medicineId")
     suspend fun deleteMedicine(medicineId: Int)
+
+    @Insert
+    suspend fun saveNotification(notificationEntity: NotificationEntity)
+
+    @Query("select * from notifications")
+    suspend fun getAllNotifications(): List<NotificationEntity>
+
+    @Query("delete from notifications where id=:notificationId")
+    suspend fun deleteNotification(notificationId: Int)
+
+    @Query("delete from notifications")
+    suspend fun deleteNotifications()
 
 }

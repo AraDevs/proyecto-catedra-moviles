@@ -29,4 +29,20 @@ class UseCasesModule {
     @Provides
     fun providesDeleteMedicineUseCase(repository: DatabaseRepository): DeleteMedicineUseCase =
         DeleteMedicineUseCase(repository)
+
+    @Provides
+    fun providesSaveNotificationUseCase(repository: DatabaseRepository): SaveNotificationUseCase =
+        SaveNotificationUseCase(repository)
+
+    @Provides
+    fun providesGetNotificationsUseCase(repository: DatabaseRepository): GetNotificationsUseCase =
+        GetNotificationsUseCase(repository)
+
+    @Provides
+    fun providesDeleteNotificationUseCase(repository: DatabaseRepository): DeleteNotificationUseCase =
+        DeleteNotificationUseCase(repository)
+
+    @Provides
+    fun providesDeleteNotificationsUseCase(repository: DatabaseRepository): DeleteNotificationUseCase =
+        DeleteNotificationUseCase(repository)
 }

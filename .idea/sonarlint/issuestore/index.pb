@@ -17,23 +17,13 @@ c
 capp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/view_models/MainActivityViewModel.kt,7\5\758d7998aec4e24c17f64e22231ef77c8c6f3d36
 ~
 Napp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/MainActivity.kt,e\4\e4c38b6c6fb8fbdc3221d340abb4d312c4ca7778
-É
-Sstoragemanager/src/main/java/com/aradevs/storagemanager/modules/RepositoryModule.kt,5\e\5e4d22ae7c74f67f176919b6e209f1948e59670e
-Å
-Qstoragemanager/src/main/java/com/aradevs/storagemanager/modules/DatabaseModule.kt,6\7\6739cfb77319b8b409a96c6611132ad6d8c68a34
 c
 3domain/src/main/java/com/aradevs/domain/Medicine.kt,4\6\464d14de59b53c8fc296661efaac9d0fceaf6193
 v
 Fstoragemanager/src/main/java/com/aradevs/storagemanager/AppDatabase.kt,f\c\fc8a01aeea3e1c5cf7fc342087e2d87ab7be619c
-Ä
-Pstoragemanager/src/main/java/com/aradevs/storagemanager/data_handling/Mappers.kt,e\5\e5b4ddd61ecb1ad5e5cdef4faffbd7c7eac8f9f3
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 ê
 `app/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/dashboard/dialogs/AddMedicineDialog.kt,d\2\d2a00f3fb568238000f27d02caa10b77b72ea212
 Ö
 Uapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/history/HistoryViewModel.kt,b\0\b0312f0f126e0e55fe234f2aca6b9262e35543fb
-s
-Cstoragemanager/src/main/java/com/aradevs/storagemanager/Entities.kt,c\0\c045f2b2202aad149de29496640355ad6235b518
 u
 Estoragemanager/src/main/java/com/aradevs/storagemanager/Converters.kt,f\0\f0c03883682b0fbc3236a291bd4cd49715cd1b31

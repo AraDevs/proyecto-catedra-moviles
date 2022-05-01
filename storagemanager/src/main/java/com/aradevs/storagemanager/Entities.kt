@@ -22,3 +22,11 @@ data class MedicineEntity(
     val requiresNotification: Boolean,
 )
 
+@Entity(tableName = "notifications")
+data class NotificationEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val content: String,
+    val date: Date,
+)
+
