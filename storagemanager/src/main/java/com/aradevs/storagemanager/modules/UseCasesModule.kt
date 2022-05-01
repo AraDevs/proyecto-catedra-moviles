@@ -23,8 +23,8 @@ class UseCasesModule {
         GetAllMedicinesUseCase(repository)
 
     @Provides
-    fun providesUpdateMedicineUseCase(repository: DatabaseRepository): UpdateMedicineUseCase =
-        UpdateMedicineUseCase(repository)
+    fun providesDeactivateMedicineUseCase(repository: DatabaseRepository): DeactivateMedicineUseCase =
+        DeactivateMedicineUseCase(repository)
 
     @Provides
     fun providesDeleteMedicineUseCase(repository: DatabaseRepository): DeleteMedicineUseCase =

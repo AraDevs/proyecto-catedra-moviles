@@ -11,8 +11,8 @@ class DatabaseRepository(private val databaseLocalDataSource: DatabaseLocalDataS
 
     suspend fun getAllMedicines() = databaseLocalDataSource.getAllMedicine()
 
-    suspend fun updateMedicine(medicine: Medicine) =
-        databaseLocalDataSource.updateMedicine(medicine)
+    suspend fun deactivateMedicine(medicine: Medicine) =
+        databaseLocalDataSource.deactivateMedicine(medicine)
 
     suspend fun deleteMedicine(medicineId: Int) = databaseLocalDataSource.deleteMedicine(medicineId)
 }

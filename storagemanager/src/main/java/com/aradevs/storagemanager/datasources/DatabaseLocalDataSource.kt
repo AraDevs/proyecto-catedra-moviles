@@ -7,6 +7,6 @@ interface DatabaseLocalDataSource {
     suspend fun saveMedicine(medicine: Medicine): Status<Unit>
     suspend fun getMedicines(): Status<List<Medicine>>
     suspend fun getAllMedicine(): Status<List<Medicine>>
-    suspend fun updateMedicine(medicine: Medicine): Status<Unit>
+    suspend fun deactivateMedicine(medicine: Medicine): Status<Unit>
     suspend fun deleteMedicine(medicineId: Int): Status<Unit>
 }

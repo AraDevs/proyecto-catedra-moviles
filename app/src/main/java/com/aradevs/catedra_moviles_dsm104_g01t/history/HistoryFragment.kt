@@ -9,6 +9,7 @@ import com.aradevs.catedra_moviles_dsm104_g01t.R
 import com.aradevs.catedra_moviles_dsm104_g01t.adapters.MedicineListAdapter
 import com.aradevs.catedra_moviles_dsm104_g01t.databinding.FragmentHistoryBinding
 import com.aradevs.domain.Medicine
+import com.aradevs.domain.RenderLocation
 import com.aradevs.domain.coroutines.Status
 import com.c3rberuss.androidutils.showThisAndHide
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -50,7 +51,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             return
         }
         binding.medicineList.showThisAndHide(binding.emptyMedicines.root)
-        binding.medicineList.adapter = MedicineListAdapter(true) {
+        binding.medicineList.adapter = MedicineListAdapter(true, RenderLocation.HISTORY) {
             onMedicineDeleteTapped(it)
         }.apply {
             submitList(items)

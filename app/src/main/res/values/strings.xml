@@ -32,4 +32,6 @@
     <string name="check_error_add_medicine">Por favor ingresa todos los datos y escoge un color para tu medicamento</string>
     <string name="set_notifications">Establecer notificaciones</string>
     <string name="delete_medicine">Eliminar medicamento</string>
+    <string name="medicine_no_longer_in_use">Ya no tomo este medicamento</string>
+    <string name="hide_medicine_from_list">Ocultar de la lista</string>
 </resources>

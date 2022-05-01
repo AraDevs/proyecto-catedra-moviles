@@ -32,7 +32,7 @@ fun Date.requireFutureDates(timeSpan: Int, spanType: SpanType): List<Date> {
     val listOfDates: MutableList<Date> = mutableListOf()
     var counter = 0
     calendar.add(Calendar.DAY_OF_YEAR, -1)
-    while (counter <= timesToRepeat+1) {
+    while (counter <= timesToRepeat + 1) {
         calendar.add(Calendar.MINUTE, 60 * timeSpan)
         listOfDates.add(calendar.time)
         counter++
@@ -47,6 +47,15 @@ fun Date.setAsTodayDate(): Date {
     val fullTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:s", Locale.US)
     val currentTimeAsString = "${Date().toYearMonthDay()} ${timeFormat.format(this)}"
     return fullTimeFormat.parse(currentTimeAsString) ?: Date()
+}
+
+fun Date.setAsProvidedDate(providedDate: Date): Date {
+    val calendar = Calendar.getInstance()
+    calendar.time = this
+    val timeFormat = SimpleDateFormat("HH:mm:s", Locale.US)
+    val fullTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:s", Locale.US)
+    val currentTimeAsString = "${providedDate.toYearMonthDay()} ${timeFormat.format(this)}"
+    return fullTimeFormat.parse(currentTimeAsString) ?: providedDate
 }
 
 fun Date.toYearMonthDay(): String {

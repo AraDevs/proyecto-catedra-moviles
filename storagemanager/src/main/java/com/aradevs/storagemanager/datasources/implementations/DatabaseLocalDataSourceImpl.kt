@@ -36,9 +36,9 @@ class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDa
         }
     }
 
-    override suspend fun updateMedicine(medicine: Medicine): Status<Unit> {
+    override suspend fun deactivateMedicine(medicine: Medicine): Status<Unit> {
         return try {
-            db.getDatabaseDao().updateMedicine(medicine.toEntity())
+            db.getDatabaseDao().deactivateMedicine(medicine.id)
             Status.Success(Unit)
         } catch (e: Exception) {
             Status.Error(e)

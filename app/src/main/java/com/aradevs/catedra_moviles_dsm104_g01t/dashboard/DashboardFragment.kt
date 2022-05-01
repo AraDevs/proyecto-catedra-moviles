@@ -12,6 +12,7 @@ import com.aradevs.catedra_moviles_dsm104_g01t.adapters.MedicineListAdapter
 import com.aradevs.catedra_moviles_dsm104_g01t.dashboard.dialogs.AddMedicineDialog
 import com.aradevs.catedra_moviles_dsm104_g01t.databinding.FragmentDashboardBinding
 import com.aradevs.domain.Medicine
+import com.aradevs.domain.RenderLocation
 import com.aradevs.domain.SpanType
 import com.aradevs.domain.coroutines.Status
 import com.c3rberuss.androidutils.*
@@ -121,7 +122,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
         binding.medicineList.showThisAndHide(binding.emptyMedicines.root)
         recyclerViewLayoutSelector()
-        binding.medicineList.adapter = MedicineListAdapter(false) {
+        binding.medicineList.adapter = MedicineListAdapter(false, RenderLocation.DASHBOARD) {
             onMedicineDeleteTapped(it)
         }.apply {
             submitList(listWithFilters)

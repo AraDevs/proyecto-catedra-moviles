@@ -1,4 +1,4 @@
-package com.aradevs.catedra_moviles_dsm104_g01t.dashboard
+package com.aradevs.catedra_moviles_dsm104_g01t.calendar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,18 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aradevs.domain.Medicine
 import com.aradevs.domain.coroutines.Status
-import com.aradevs.storagemanager.use_cases.GetMedicinesUseCase
-import com.aradevs.storagemanager.use_cases.SaveMedicineUseCase
+import com.aradevs.storagemanager.use_cases.GetAllMedicinesUseCase
 import com.aradevs.storagemanager.use_cases.DeactivateMedicineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
-    private val getMedicinesUseCase: GetMedicinesUseCase,
-    private val saveMedicineUseCase: SaveMedicineUseCase,
+class CalendarViewModel @Inject constructor(
+    private val getAllMedicinesUseCase: GetAllMedicinesUseCase,
     private val deactivateMedicineUseCase: DeactivateMedicineUseCase,
 ) :
     ViewModel() {
@@ -25,13 +24,13 @@ class DashboardViewModel @Inject constructor(
     private val _medicinesStatus: MutableLiveData<Status<List<Medicine>>> =
         MutableLiveData(Status.Loading())
     val medicineStatus: LiveData<Status<List<Medicine>>> get() = _medicinesStatus
-
     val medicineList: MutableList<Medicine> = mutableListOf()
+    var providedDate: Date = Date()
 
     fun getMedicines() {
         _medicinesStatus.postValue(Status.Loading())
         viewModelScope.launch(Dispatchers.IO) {
-            when (val status = getMedicinesUseCase()) {
+            when (val status = getAllMedicinesUseCase()) {
                 is Status.Success -> {
                     medicineList.clear()
                     medicineList.addAll(status.data)
@@ -53,16 +52,4 @@ class DashboardViewModel @Inject constructor(
             }
         }
     }
-
-    fun saveMedicine(medicine: Medicine) {
-        viewModelScope.launch(Dispatchers.IO) {
-            when (saveMedicineUseCase(medicine)) {
-                is Status.Success -> getMedicines()
-                else -> {
-                    //do nothing
-                }
-            }
-        }
-    }
-
 }

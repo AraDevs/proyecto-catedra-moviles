@@ -16,8 +16,8 @@ class GetAllMedicinesUseCase(private val repository: DatabaseRepository) {
     suspend operator fun invoke() = repository.getAllMedicines()
 }
 
-class UpdateMedicineUseCase(private val repository: DatabaseRepository) {
-    suspend operator fun invoke(medicine: Medicine) = repository.updateMedicine(medicine)
+class DeactivateMedicineUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke(medicine: Medicine) = repository.deactivateMedicine(medicine)
 }
 
 class DeleteMedicineUseCase(private val repository: DatabaseRepository) {

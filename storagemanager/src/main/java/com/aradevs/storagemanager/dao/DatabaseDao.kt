@@ -3,7 +3,6 @@ package com.aradevs.storagemanager.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 import com.aradevs.storagemanager.MedicineEntity
 
 @Dao
@@ -17,8 +16,8 @@ interface DatabaseDao {
     @Query("select * from medicine_info")
     suspend fun getAllMedicines(): List<MedicineEntity>
 
-    @Update
-    suspend fun updateMedicine(medicineEntity: MedicineEntity)
+    @Query("update medicine_info set status = 0 where id = :medicineId")
+    suspend fun deactivateMedicine(medicineId: Int)
 
     @Query("delete from medicine_info where id = :medicineId")
     suspend fun deleteMedicine(medicineId: Int)
