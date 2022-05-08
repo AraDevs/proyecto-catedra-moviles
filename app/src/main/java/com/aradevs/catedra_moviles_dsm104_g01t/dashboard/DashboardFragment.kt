@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.aradevs.catedra_moviles_dsm104_g01t.*
@@ -11,6 +12,7 @@ import com.aradevs.catedra_moviles_dsm104_g01t.R
 import com.aradevs.catedra_moviles_dsm104_g01t.adapters.MedicineListAdapter
 import com.aradevs.catedra_moviles_dsm104_g01t.dashboard.dialogs.AddMedicineDialog
 import com.aradevs.catedra_moviles_dsm104_g01t.databinding.FragmentDashboardBinding
+import com.aradevs.catedra_moviles_dsm104_g01t.main.view_models.MainActivityViewModel
 import com.aradevs.domain.Medicine
 import com.aradevs.domain.RenderLocation
 import com.aradevs.domain.SpanType
@@ -25,6 +27,7 @@ import java.util.*
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private val binding: FragmentDashboardBinding by viewBinding()
     private val viewModel: DashboardViewModel by viewModels()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,10 +43,18 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
     }
 
+    /**
+     * Function to be called inside the [AddMedicineDialog] when the save button is tapped
+     */
     private fun onMedicineAdd(medicine: Medicine) {
-        viewModel.saveMedicine(medicine)
+        viewModel.saveMedicine(medicine) {
+            mainActivityViewModel.cancelNotificationsAlarmManagersAndSetNewOnes()
+        }
     }
 
+    /**
+     * Observes the medicine status of the viewModel
+     */
     private fun observeMedicineStatus() {
         viewModel.medicineStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
@@ -64,6 +75,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
     }
 
+    /**
+     * Fills the time span selector and tries to fill the recyclerview with data
+     */
     private fun setupUI() {
         setupHeader()
         binding.timeSpanSelector.onItemSelectedListener =
@@ -85,6 +99,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         setUpRecyclerViewData()
     }
 
+    /**
+     * Set's up the header view and shows the med in the next hour if available
+     */
     private fun setupHeader() {
         try {
             val medicine =
@@ -114,6 +131,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     }
 
+    /**
+     * Tries to fill the recyclerview with the medicine list if available
+     * if the medicine list is empty, an empty screen is shown instead
+     */
     private fun setUpRecyclerViewData() {
         val listWithFilters = withFilters(viewModel.medicineList)
         if (listWithFilters.isNullOrEmpty()) {
@@ -129,6 +150,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
     }
 
+    /**
+     * Returns a list of meds to be taken based on the provided time span selected
+     */
     private fun withFilters(list: List<Medicine>): List<Medicine> {
         val tempList: MutableList<Medicine> = list.toMutableList()
         return when (binding.timeSpanSelector.selectedItemPosition) {
@@ -138,7 +162,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 val medicineTakesList: MutableList<Medicine> = mutableListOf()
                 filteredList.forEach { medicine ->
                     medicine.startDate.setAsTodayDate()
-                        .requireFutureDates(medicine.repeatInterval.toInt(), SpanType.DAY).forEach {
+                        .requireFutureDates(medicine.repeatInterval.toInt(), daysRangeSelector(0))
+                        .forEach {
                             if (it.dayOfMonth == Date().dayOfMonth && it.after(Date())) medicineTakesList.add(
                                 medicine.copy(
                                     startDate = it))
@@ -147,11 +172,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 medicineTakesList.sortBy { it.startDate }
                 return medicineTakesList
             }
-            1 -> {
+            1, 2 -> {
                 val medicineTakesList: MutableList<Medicine> = mutableListOf()
                 tempList.forEach { medicine ->
                     medicine.startDate.setAsTodayDate()
-                        .requireFutureDates(medicine.repeatInterval.toInt(), SpanType.WEEK)
+                        .requireFutureDates(medicine.repeatInterval.toInt(),
+                            daysRangeSelector(binding.timeSpanSelector.selectedItemPosition))
                         .forEach {
                             if (it.after(Date())) medicineTakesList.add(medicine.copy(startDate = it))
                         }
@@ -163,6 +189,20 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
     }
 
+    /**
+     * Returns [SpanType] based on the time span selected
+     */
+    private fun daysRangeSelector(selectedRangeId: Int): SpanType {
+        return when (selectedRangeId) {
+            1 -> SpanType.WEEK
+            2 -> SpanType.MONTH
+            else -> SpanType.DAY
+        }
+    }
+
+    /**
+     * Returns the number of columns to be shown based on the time span selected
+     */
     private fun recyclerViewLayoutSelector() {
         when (binding.timeSpanSelector.selectedItemPosition) {
             0 -> binding.medicineList.layoutManager = linearLayoutManager()
@@ -170,7 +210,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         }
     }
 
+    /**
+     * Sets a med as inactive when the "delete" button is tapped inside a card
+     */
     private fun onMedicineDeleteTapped(medicine: Medicine) {
-        viewModel.setMedicineAsInactive(medicine)
+        viewModel.setMedicineAsInactive(medicine) {
+            mainActivityViewModel.cancelNotificationsAlarmManagersAndSetNewOnes()
+        }
     }
 }

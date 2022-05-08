@@ -7,23 +7,7 @@ C
 domain/build.gradle,a\3\a3021bb5ba623a461b5fdb89ae51923a4945c354
 l
 <domain/src/main/java/com/aradevs/domain/coroutines/Status.kt,a\0\a0269fb895aab42bdcbb41b9676d57c9892fdd7f
-|
-Lapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/BaseApplication.kt,9\e\9ef4d453899f1659bdfd55494e813a0effd65c0c
-c
-3domain/src/main/java/com/aradevs/domain/SpanType.kt,9\a\9a42572db6ebba071d4633dea5980fdb800016e5
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-“
-capp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/view_models/MainActivityViewModel.kt,7\5\758d7998aec4e24c17f64e22231ef77c8c6f3d36
-~
-Napp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/main/MainActivity.kt,e\4\e4c38b6c6fb8fbdc3221d340abb4d312c4ca7778
-c
-3domain/src/main/java/com/aradevs/domain/Medicine.kt,4\6\464d14de59b53c8fc296661efaac9d0fceaf6193
-v
-Fstoragemanager/src/main/java/com/aradevs/storagemanager/AppDatabase.kt,f\c\fc8a01aeea3e1c5cf7fc342087e2d87ab7be619c
-
-`app/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/dashboard/dialogs/AddMedicineDialog.kt,d\2\d2a00f3fb568238000f27d02caa10b77b72ea212
-…
-Uapp/src/main/java/com/aradevs/catedra_moviles_dsm104_g01t/history/HistoryViewModel.kt,b\0\b0312f0f126e0e55fe234f2aca6b9262e35543fb
-u
-Estoragemanager/src/main/java/com/aradevs/storagemanager/Converters.kt,f\0\f0c03883682b0fbc3236a291bd4cd49715cd1b31
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

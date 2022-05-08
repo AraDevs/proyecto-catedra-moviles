@@ -8,12 +8,13 @@ import androidx.room.TypeConverters
 import com.aradevs.storagemanager.dao.DatabaseDao
 
 @Database(
-    entities = [MedicineEntity::class],
-    version = 2
+    entities = [MedicineEntity::class, NotificationEntity::class],
+    version = 3
 )
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getDatabaseDao(): DatabaseDao
+
     companion object {
         private const val DATABASE_NAME = "app_db"
 

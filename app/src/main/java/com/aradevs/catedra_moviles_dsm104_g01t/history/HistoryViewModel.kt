@@ -22,6 +22,9 @@ class HistoryViewModel @Inject constructor(
         MutableLiveData(Status.Loading())
     val medicineStatus: LiveData<Status<List<Medicine>>> get() = _medicinesStatus
 
+    /**
+     * Obtains a list of [Medicine] from the database
+     */
     fun getMedicines() {
         _medicinesStatus.postValue(Status.Loading())
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,10 +38,16 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    fun deleteMedicine(medicineId: Int) {
+    /**
+     * Deletes a [Medicine] from the database
+     */
+    fun deleteMedicine(medicineId: Int, onNotificationSetup: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val status = deleteMedicineUseCase(medicineId)) {
-                is Status.Success -> getMedicines()
+            when ( deleteMedicineUseCase(medicineId)) {
+                is Status.Success -> {
+                    getMedicines()
+                    onNotificationSetup()
+                }
                 else -> {
                     //do nothing
                 }

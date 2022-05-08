@@ -2,5 +2,6 @@ package com.aradevs.domain
 
 enum class SpanType {
     DAY,
-    WEEK
+    WEEK,
+    MONTH
 }

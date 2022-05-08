@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meds App</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="calendar">Calendar</string>
+    <string name="log">History</string>
+    <string name="lorem_ipsum">lorem ipsum</string>
+    <string name="add_medicine">Add medicine</string>
+    <string name="no_medicines_to_show">No medicines to show</string>
+    <string name="empty_string">- - -</string>
+    <string-array name="range_picker_items">
+        <item>Today</item>
+        <item>7 days</item>
+        <item>30 days</item>
+    </string-array>
+    <string name="error_obtaining_info">Error getting information</string>
+    <string name="current_medicine_header_description">…or if you prefer, check your next medicines down below</string>
+    <string name="current_medicine_empty_header_description">You don\'t have any meds in the next hour</string>
+    <string name="log_description">Meds you are taking or you have taken previously</string>
+    <string name="all_good">All good</string>
+    <string name="medicine">Medicine</string>
+    <string name="name">Name</string>
+    <string name="init_date">Start date</string>
+    <string name="doctor_name">Doctor name</string>
+    <string name="take_every">Take every</string>
+    <string name="hours">hours</string>
+    <string name="one">1</string>
+    <string name="color_indicator">Color indicator</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="select_a_color">Select a color</string>
+    <string name="valid_hour_interval">Insert a valid amount of hours</string>
+    <string name="validation_error_add_medicine">Insert a valid start date or an hour interval between 1 and 24</string>
+    <string name="check_error_add_medicine">Please fill all the fields and pick a color for your med</string>
+    <string name="set_notifications">Set notifications</string>
+    <string name="delete_medicine">Delete medicine</string>
+    <string name="medicine_no_longer_in_use">Disable</string>
+    <string name="hide_medicine_from_list">Hide from the list</string>
+    <string name="every">Every</string>
+    <string name="inactive">Inactive</string>
+    <string name="reminder">Reminder</string>
+</resources>

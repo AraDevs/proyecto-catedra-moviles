@@ -5,10 +5,11 @@ import com.aradevs.storagemanager.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(ViewModelComponent::class, ActivityComponent::class)
 class UseCasesModule {
     @Provides
     fun providesSaveMedicineUseCase(repository: DatabaseRepository): SaveMedicineUseCase =
@@ -43,6 +44,6 @@ class UseCasesModule {
         DeleteNotificationUseCase(repository)
 
     @Provides
-    fun providesDeleteNotificationsUseCase(repository: DatabaseRepository): DeleteNotificationUseCase =
-        DeleteNotificationUseCase(repository)
+    fun providesDeleteNotificationsUseCase(repository: DatabaseRepository): DeleteNotificationsUseCase =
+        DeleteNotificationsUseCase(repository)
 }

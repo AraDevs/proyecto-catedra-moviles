@@ -16,6 +16,13 @@ import com.aradevs.domain.RenderLocation
 import com.c3rberuss.androidutils.toDayMonthYearHour
 import timber.log.Timber
 
+/**
+ * [MedicineListAdapter]
+ * Recyclerview adapter for [MedicineItemBinding]
+ * @param needsFullInfo represents if the "description" field in the view should be displayed or not
+ * @param renderLocation represents the render location of the list
+ * @param onDeleteTapped represents the function to be triggered on the "delete" view tapped
+ */
 class MedicineListAdapter(
     private val needsFullInfo: Boolean,
     private val renderLocation: RenderLocation,
@@ -41,7 +48,21 @@ class MedicineListAdapter(
                 title.text = medicine.name
                 description.isVisible = needsFullInfo
                 description.text = medicine.doctorName
-                dateTime.text = medicine.startDate.toDayMonthYearHour()
+                dateTime.text = when (renderLocation) {
+                    RenderLocation.HISTORY -> "${medicine.startDate.toDayMonthYearHour()} - ${
+                        binding.root.context.getString(R.string.every)
+                    } ${medicine.repeatInterval}h"
+                    RenderLocation.CALENDAR -> {
+                        if (!medicine.status) {
+                            "${medicine.startDate.toDayMonthYearHour()} - ${
+                                binding.root.context.getString(R.string.inactive)
+                            }"
+                        } else {
+                            medicine.startDate.toDayMonthYearHour()
+                        }
+                    }
+                    else -> medicine.startDate.toDayMonthYearHour()
+                }
                 colorIndicator.setBackgroundColor(Color.parseColor(medicine.color))
                 root.setOnClickListener {
                     deleteMedicine.isVisible = !deleteMedicine.isVisible
@@ -55,6 +76,9 @@ class MedicineListAdapter(
         }
     }
 
+    /**
+     * Returns the delete view text based on the render location
+     */
     private fun selectDeleteLabel(context: Context): String {
         return when (renderLocation) {
             RenderLocation.DASHBOARD -> context.getString(R.string.medicine_no_longer_in_use)

@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aradevs.domain.Medicine
 import com.aradevs.domain.coroutines.Status
+import com.aradevs.storagemanager.use_cases.DeactivateMedicineUseCase
 import com.aradevs.storagemanager.use_cases.GetMedicinesUseCase
 import com.aradevs.storagemanager.use_cases.SaveMedicineUseCase
-import com.aradevs.storagemanager.use_cases.DeactivateMedicineUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +28,9 @@ class DashboardViewModel @Inject constructor(
 
     val medicineList: MutableList<Medicine> = mutableListOf()
 
+    /**
+     * Obtains the list of [Medicine] from the database
+     */
     fun getMedicines() {
         _medicinesStatus.postValue(Status.Loading())
         viewModelScope.launch(Dispatchers.IO) {
@@ -43,10 +46,16 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-    fun setMedicineAsInactive(medicine: Medicine) {
+    /**
+     * Sets a medicine as inactive
+     */
+    fun setMedicineAsInactive(medicine: Medicine, onNotificationSetup: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             when (deactivateMedicineUseCase(medicine.copy(status = false))) {
-                is Status.Success -> getMedicines()
+                is Status.Success -> {
+                    getMedicines()
+                    onNotificationSetup()
+                }
                 else -> {
                     //do nothing
                 }
@@ -54,10 +63,16 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-    fun saveMedicine(medicine: Medicine) {
+    /**
+     * Saves a medicine in the database
+     */
+    fun saveMedicine(medicine: Medicine, onNotificationSetup: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             when (saveMedicineUseCase(medicine)) {
-                is Status.Success -> getMedicines()
+                is Status.Success -> {
+                    getMedicines()
+                    onNotificationSetup()
+                }
                 else -> {
                     //do nothing
                 }

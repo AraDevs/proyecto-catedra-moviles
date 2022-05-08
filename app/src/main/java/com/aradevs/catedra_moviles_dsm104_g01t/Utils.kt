@@ -6,10 +6,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.ceil
 
+/**
+ * Returns true if the extended date is within the next hour
+ */
 fun Date.isWithinNextHour(timeSpan: Int): Boolean {
     return getClosestDate(timeSpan) != null
 }
 
+/**
+ * Returns the closest date based on the provided time span
+ */
 fun Date.getClosestDate(timeSpan: Int): Date? {
     val calendar: Calendar = Calendar.getInstance()
     calendar.time = Date()
@@ -21,12 +27,19 @@ fun Date.getClosestDate(timeSpan: Int): Date? {
     return nextHourDate
 }
 
+/**
+ * Obtains a list of future dates based on the provided time span and span type
+ * [SpanType.DAY]
+ * [SpanType.WEEK]
+ * [SpanType.MONTH]
+ */
 fun Date.requireFutureDates(timeSpan: Int, spanType: SpanType): List<Date> {
     val calendar: Calendar = Calendar.getInstance()
     calendar.time = this
     val hoursValue: Double = when (spanType) {
-        SpanType.DAY -> 24.0
-        SpanType.WEEK -> 168.0
+        SpanType.DAY -> 24.0 //24h in one day
+        SpanType.WEEK -> 168.0 //168h in 7 days
+        SpanType.MONTH -> 720.0 //720h in 30 days
     }
     val timesToRepeat = ceil(hoursValue / timeSpan)
     val listOfDates: MutableList<Date> = mutableListOf()
@@ -40,6 +53,9 @@ fun Date.requireFutureDates(timeSpan: Int, spanType: SpanType): List<Date> {
     return listOfDates
 }
 
+/**
+ * Converts the extended date to today format, keeping the HH:mm:ss
+ */
 fun Date.setAsTodayDate(): Date {
     val calendar = Calendar.getInstance()
     calendar.time = this
@@ -49,6 +65,9 @@ fun Date.setAsTodayDate(): Date {
     return fullTimeFormat.parse(currentTimeAsString) ?: Date()
 }
 
+/**
+ * Converts the extended date to the provided date format, keeping HH:mm:ss
+ */
 fun Date.setAsProvidedDate(providedDate: Date): Date {
     val calendar = Calendar.getInstance()
     calendar.time = this
@@ -58,6 +77,9 @@ fun Date.setAsProvidedDate(providedDate: Date): Date {
     return fullTimeFormat.parse(currentTimeAsString) ?: providedDate
 }
 
+/**
+ * Converts a the extended date to yyyy-mm-dd format
+ */
 fun Date.toYearMonthDay(): String {
     val formatter: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     return formatter.format(this)

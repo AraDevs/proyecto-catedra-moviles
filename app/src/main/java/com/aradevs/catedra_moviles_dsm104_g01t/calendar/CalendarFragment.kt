@@ -35,8 +35,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         super.onViewCreated(view, savedInstanceState)
         observeMedicineStatus()
         viewModel.getMedicines()
-
-
         binding.calendarView.setOnDateChangeListener { _, year, month, day ->
             viewModel.providedDate =
                 SimpleDateFormat("yyyy-MM-dd").parse("$year-${month + 1}-$day") as Date
@@ -45,6 +43,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
     }
 
+    /**
+     * Observes the medicine request status
+     */
     private fun observeMedicineStatus() {
         viewModel.medicineStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
@@ -63,6 +64,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
+    /**
+     * Set's up the list container and validates if the provided list is null or empty
+     */
     private fun setupUI(items: List<Medicine>) {
         if (items.isNullOrEmpty()) {
             binding.emptyMedicines.root.showThisAndHide(binding.medicineList)
@@ -76,6 +80,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
+    /**
+     * Triggers actions when the "delete" item is tapped
+     */
     private fun onMedicineDeleteTapped(medicine: Medicine) {
         try {
             val listAdapter = binding.medicineList.adapter as MedicineListAdapter
@@ -92,6 +99,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
+    /**
+     * Returns the list of medicines to be taken in the provided date
+     */
     private fun getDateMedicines(list: List<Medicine>): List<Medicine> {
         Timber.d("provide date ${viewModel.providedDate}")
         val tempList: MutableList<Medicine> = list.toMutableList()
@@ -101,11 +111,18 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         filteredList.forEach { medicine ->
             medicine.startDate.setAsProvidedDate(viewModel.providedDate)
                 .requireFutureDates(medicine.repeatInterval.toInt(), SpanType.DAY).forEach {
+
+                    if (!medicine.status && medicineTakesList.find { m -> m.name == medicine.name } == null && medicine.startDate.dayOfMonth == viewModel.providedDate.dayOfMonth) {
+                        medicineTakesList.add(
+                            medicine)
+                    }
                     if (it.dayOfMonth == viewModel.providedDate.dayOfMonth && it.after(
-                            medicine.startDate)
-                    ) medicineTakesList.add(
-                        medicine.copy(
-                            startDate = it))
+                            medicine.startDate) && medicine.status
+                    ) {
+                        medicineTakesList.add(
+                            medicine.copy(
+                                startDate = it))
+                    }
                 }
         }
         medicineTakesList.sortBy { it.startDate }

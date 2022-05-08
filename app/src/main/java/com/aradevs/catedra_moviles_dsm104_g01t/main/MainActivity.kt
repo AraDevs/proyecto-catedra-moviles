@@ -25,15 +25,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         navController = navHostFragment.navController
         //navController.addOnDestinationChangedListener(this::onDestinationChanged)
         binding.bottomNav.setupWithNavController(navController)
+        viewModel.context = applicationContext
+        viewModel.cancelNotificationsAlarmManagersAndSetNewOnes()
     }
-/*
-    private fun onDestinationChanged(
-        controller: NavController,
-        destination: NavDestination,
-        args: Bundle?,
-    ) {
-        binding.bottomNav.isVisible =
-            destination.id != R.id.medicine_detail_fragment && destination.id != R.id.shopping_cart_fragment
-    }
-*/
 }

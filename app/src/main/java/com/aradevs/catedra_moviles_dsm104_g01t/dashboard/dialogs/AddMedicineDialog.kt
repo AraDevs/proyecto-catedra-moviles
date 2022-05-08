@@ -54,35 +54,7 @@ class AddMedicineDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListen
             setupTime()
 
             save.setOnClickListener {
-                try {
-                    if (validator()) {
-                        with(binding) {
-                            val initDate: Date = format.parse(initDate.text.toString())!!
-                            val numericInterval = repeatInterval.text.toString().toInt()
-                            if (numericInterval <= 0 || numericInterval > 24) {
-                                Snackbar.make(root,
-                                    getString(R.string.valid_hour_interval),
-                                    LENGTH_SHORT).show()
-                                return@setOnClickListener
-                            }
-                            onTap(Medicine(0,
-                                name.text.toString(),
-                                doctorName.text.toString(),
-                                initDate,
-                                numericInterval.toString(),
-                                colorHex ?: "#346DC3", true, requiresNotification.isSelected))
-                        }
-                        dismiss()
-                    } else {
-                        Snackbar.make(binding.root,
-                            getString(R.string.check_error_add_medicine),
-                            LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Snackbar.make(binding.root,
-                        getString(R.string.validation_error_add_medicine),
-                        LENGTH_SHORT).show()
-                }
+                saveMedicine()
             }
             cancel.setOnClickListener {
                 dismiss()
@@ -94,9 +66,9 @@ class AddMedicineDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListen
 
             colorPicker.setOnClickListener {
                 ColorPickerDialog
-                    .Builder(requireContext())                        // Pass Activity Instance
-                    .setTitle(getString(R.string.select_a_color))            // Default "Choose Color"
-                    .setColorShape(ColorShape.SQAURE)    // Pass Default Color
+                    .Builder(requireContext())
+                    .setTitle(getString(R.string.select_a_color))
+                    .setColorShape(ColorShape.SQAURE)
                     .setColorListener { color, colorHexValue ->
                         colorHex = colorHexValue
                         Timber.d(colorHex)
@@ -104,6 +76,41 @@ class AddMedicineDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListen
                     }
                     .show()
             }
+        }
+    }
+
+    /**
+     * Contains the "save" actions
+     */
+    private fun saveMedicine() {
+        try {
+            if (validator()) {
+                with(binding) {
+                    val initDate: Date = format.parse(initDate.text.toString())!!
+                    val numericInterval = repeatInterval.text.toString().toInt()
+                    if (numericInterval <= 0 || numericInterval > 24) {
+                        Snackbar.make(root,
+                            getString(R.string.valid_hour_interval),
+                            LENGTH_SHORT).show()
+                        return
+                    }
+                    onTap(Medicine(0,
+                        name.text.toString(),
+                        doctorName.text.toString(),
+                        initDate,
+                        numericInterval.toString(),
+                        colorHex ?: "#346DC3", true, requiresNotification.isChecked))
+                }
+                dismiss()
+            } else {
+                Snackbar.make(binding.root,
+                    getString(R.string.check_error_add_medicine),
+                    LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Snackbar.make(binding.root,
+                getString(R.string.validation_error_add_medicine),
+                LENGTH_SHORT).show()
         }
     }
 

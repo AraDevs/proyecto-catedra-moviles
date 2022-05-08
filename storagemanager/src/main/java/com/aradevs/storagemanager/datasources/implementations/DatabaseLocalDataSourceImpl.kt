@@ -7,6 +7,7 @@ import com.aradevs.storagemanager.AppDatabase
 import com.aradevs.storagemanager.data_handling.toDomain
 import com.aradevs.storagemanager.data_handling.toEntity
 import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
+import timber.log.Timber
 
 class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDataSource {
 
@@ -60,6 +61,7 @@ class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDa
             db.getDatabaseDao().saveNotification(notification.toEntity())
             Status.Success(Unit)
         } catch (e: Exception) {
+            Timber.d(e)
             Status.Error(e)
         }
     }

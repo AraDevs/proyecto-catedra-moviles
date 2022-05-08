@@ -1,31 +1,47 @@
 package com.aradevs.catedra_moviles_dsm104_g01t.scheduler
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.aradevs.catedra_moviles_dsm104_g01t.R
 import com.aradevs.catedra_moviles_dsm104_g01t.main.MainActivity
-import com.aradevs.storagemanager.use_cases.GetMedicinesUseCase
+import com.aradevs.domain.coroutines.Status
+import com.aradevs.storagemanager.AppDatabase
+import com.aradevs.storagemanager.datasources.implementations.DatabaseLocalDataSourceImpl
+import com.aradevs.storagemanager.repositories.DatabaseRepository
+import com.aradevs.storagemanager.use_cases.GetNotificationsUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.*
-import javax.inject.Inject
 
 const val OPEN_NOTIFICATION_ACTION = "open_notification"
 const val SHOW_NOTIFICATION_ACTION = "show_notification"
 
 @AndroidEntryPoint
-class ReminderReceiver @Inject constructor(private val getMedicinesUseCase: GetMedicinesUseCase) : BroadcastReceiver() {
-    private val CHANNEL_ID = "Recordatorios"
-    private val sdfTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    private val sdfStandard = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+class ReminderReceiver :
+    BroadcastReceiver() {
+    private val channelId = "reminders"
 
+    lateinit var notificationsUseCase: GetNotificationsUseCase
+
+    /**
+     * Initializes the [notificationsUseCase] variable and calls [showNotification]
+     */
     override fun onReceive(context: Context?, intent: Intent?) {
-
-        Timber.i(intent?.action)
-
+        context?.let {
+            notificationsUseCase =
+                GetNotificationsUseCase(DatabaseRepository(DatabaseLocalDataSourceImpl(
+                    AppDatabase.getDatabase(context))))
+        }
         when (intent?.action) {
             SHOW_NOTIFICATION_ACTION -> showNotification(intent, context)
             else -> {
@@ -34,8 +50,12 @@ class ReminderReceiver @Inject constructor(private val getMedicinesUseCase: GetM
         }
     }
 
-    private fun showNotification(intent: Intent?, context: Context?) {
-        //createNotificationChannel(context!!)
+    /**
+     * Shows notification when an broadcast is received
+     */
+    @OptIn(DelicateCoroutinesApi::class)
+    fun showNotification(intent: Intent?, context: Context?) {
+        createNotificationChannel(context!!)
 
         val id = intent?.getIntExtra("id", 0) ?: 0
 
@@ -51,64 +71,52 @@ class ReminderReceiver @Inject constructor(private val getMedicinesUseCase: GetM
             splashIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_CANCEL_CURRENT
         )
-/*
-        val notification = getNotification(id.toString())
+        GlobalScope.launch(Dispatchers.IO) {
+            when (val status = notificationsUseCase()) {
+                is Status.Success -> {
+                    try {
+                        val notification =
+                            status.data.first { notification -> notification.id == id }
+                        val builder = NotificationCompat.Builder(context, channelId)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle(context.getString(R.string.reminder))
+                            .setStyle(notificationBodyTask(notification))
+                            .setPriority(NotificationCompat.PRIORITY_HIGH)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
 
-        if (notification != null) {
-
-            Log.e("ReminderReceiver", "NOTIFICATION TYPE ${notification.type} - ${notification.id}")
-
-            if (notification.type == "group_activity" && isGroupActivityDelivered(id.toString())) {
-                Timber.e("CANCELLED BY ACTIVITY DELIVERED - " + id + " - " + notification.type)
-                return
+                        with(NotificationManagerCompat.from(context)) {
+                            notify(id, builder.build())
+                        }
+                    } catch (e: Exception) {
+                        Timber.d("No notification found")
+                    }
+                }
+                else -> Timber.d("Error getting notifications")
             }
-
-            val calendar = Calendar.getInstance()
-
-            calendar.time = when (notification.type) {
-                "group_activity", "task", "GRUPAL", "FORO", "ONLINE", "AULA" -> sdf.parse(
-                    notification.endDate
-                )!!
-                else -> sdf.parse(notification.startDate)!!
-            }
-
-            if (Calendar.getInstance().after(calendar) && notification.type != "task") {
-                Log.e("ReminderReceiver", "CANCELLED BY AFTER DATE - $id")
-                return
-            }
-
-            val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title) //set title
-                .setStyle(notificationBodyTask(notification)) // set cont
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-
-            with(NotificationManagerCompat.from(context)) {
-                notify(id, builder.build())
-            }
-        } else {
-            Log.e("ReminderReceiver", "CANCELLED BY NOTIFICATION NULL - $id")
-        }*/
+        }
     }
 
-/*
+    /**
+     * Returns a notification body with the provided [com.aradevs.domain.Notification] object
+     */
     private fun notificationBodyTask(
-        notification: Notification,
+        notification: com.aradevs.domain.Notification,
     ): NotificationCompat.InboxStyle {
         var content = NotificationCompat.InboxStyle()
-        content = content.addLine(notification.subject)
+        content = content.addLine(notification.content)
         return content
     }
 
-
+    /**
+     * Creates a notification channel for android versions above version O
+     */
     private fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = context.getString(R.string.notifications_channel_name)
-            val descriptionText = context.getString(R.string.notifications_channel_description)
+            val name = channelId
+            val descriptionText = "medicines reminders"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            val channel = NotificationChannel(channelId, name, importance).apply {
                 description = descriptionText
             }
 
@@ -116,5 +124,5 @@ class ReminderReceiver @Inject constructor(private val getMedicinesUseCase: GetM
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-    }*/
+    }
 }

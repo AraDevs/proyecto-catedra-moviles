@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">catedra-moviles-DSM104-G01T</string>
+    <string name="app_name">Meds App</string>
     <string name="dashboard">Dashboard</string>
     <string name="calendar">Calendario</string>
     <string name="log">Historial</string>
@@ -10,6 +10,7 @@
     <string-array name="range_picker_items">
         <item>Hoy</item>
         <item>7 dias</item>
+        <item>30 dias</item>
     </string-array>
     <string name="error_obtaining_info">Error al obtener la informacion</string>
     <string name="current_medicine_header_description">...o si lo prefieres, verifica abajo tus siguientes medicamentos</string>
@@ -32,6 +33,9 @@
     <string name="check_error_add_medicine">Por favor ingresa todos los datos y escoge un color para tu medicamento</string>
     <string name="set_notifications">Establecer notificaciones</string>
     <string name="delete_medicine">Eliminar medicamento</string>
-    <string name="medicine_no_longer_in_use">Ya no tomo este medicamento</string>
+    <string name="medicine_no_longer_in_use">Deshabilitar</string>
     <string name="hide_medicine_from_list">Ocultar de la lista</string>
+    <string name="every">Cada</string>
+    <string name="inactive">Inactiva</string>
+    <string name="reminder">Recordatorio</string>
 </resources>
