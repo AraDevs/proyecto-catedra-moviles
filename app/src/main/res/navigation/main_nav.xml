@@ -19,11 +19,4 @@
         android:name="com.aradevs.catedra_moviles_dsm104_g01t.calendar.CalendarFragment"
         android:label="calendar_fragment"
         tools:layout="@layout/fragment_calendar" />
-    <!--
-    <fragment
-        android:id="@+id/purchase_history_fragment"
-        android:name="com.aradevs.desafio01_ma171622_mg171623.ui.e2.E2Fragment"
-        android:label="fragment_e2"
-        tools:layout="@layout/fragment_e2" />-->
-
 </navigation>
